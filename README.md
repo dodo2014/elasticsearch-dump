@@ -77,6 +77,7 @@ elasticdump --input=http://production.es.com:9200/my_index --output=query.json -
 - `--maxSockets` How many simultanius HTTP requests can this process make? (default: 5 [node <= v0.10.x] / Infinity [node >= v0.11.x] )
 - `--bulk-use-output-index-name` Force use of destination index name (actually the actual output URL) as destination while bulk writing to ES. Allows leveraging  Bulk API copying data inside the same elasticsearch instance. (default: false)
 - `--timeout` Integer containing the number of milliseconds to wait for a request to respond before aborting the request.  Passed directly to the `request` library.  If used in bulk writing, it will result in the entire batch not being written.  Mostly used when you don't care too much if you lose some data when importing but rather have speed.
+- `--skip` Integer containing the number of rows you wish to skip ahead from the input transport.  When importing a large index, things can go wrong, be it connectivity, crashes, someone forgetting to `screen`, etc.  This allows you to start the dump again from the last known line written (as logged by the `offset` in the output).
 
 ## Elasticsearch's scan and scroll method
 Elasticsearch provides a scan and scroll method to fetch all documents of an index. This method is much safer to use since
